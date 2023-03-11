@@ -27,7 +27,7 @@ fun MainScreen(modifier: Modifier = Modifier) {
 fun ScreenContent(modifier: Modifier) {
     val viewModel: WeatherHomeViewModel = viewModel(WeatherHomeViewModel::class.java)
     val weather = viewModel.state.observeAsState()
-    var query by remember { mutableStateOf("London,uk") }
+    var query by remember { mutableStateOf("Bhopal,in") }
     LaunchedEffect(key1 = query) {
         viewModel.findWeather(query = query)
     }

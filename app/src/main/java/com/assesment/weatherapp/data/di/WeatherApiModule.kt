@@ -1,5 +1,7 @@
 package com.assesment.weatherapp.data.di
 
+import android.app.Application
+import android.content.Context
 import com.assesment.weatherapp.data.api.ApiConstants
 import com.assesment.weatherapp.data.api.WeatherApi
 import dagger.Module
@@ -15,6 +17,11 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object WeatherApiModule {
+
+    @Singleton
+    @Provides
+    fun provideContext(application: Application): Context = application.applicationContext
+
     @Provides
     @Singleton
     fun provideApi(builder: Retrofit.Builder, okHttpClient: OkHttpClient): WeatherApi {

@@ -23,6 +23,11 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            resValue "string", "weather_api_key", "e45b374d5f33e58dff4cfb14a32b22b5"
+        }
+        debug {
+            debuggable true
+            resValue "string", "weather_api_key", "e45b374d5f33e58dff4cfb14a32b22b5"
         }
     }
     compileOptions {
