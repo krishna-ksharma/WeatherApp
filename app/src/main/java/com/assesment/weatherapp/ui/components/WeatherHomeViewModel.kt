@@ -19,7 +19,10 @@ class WeatherHomeViewModel @Inject constructor(
     val state: LiveData<WeatherUIModel>
         get() = _state
 
-    fun findWeather(query: String = "London,uk") {
+    fun findWeather(query: String) {
+        if (query.isEmpty()) {
+            return
+        }
         viewModelScope.launch {
             val result = weatherRepository.fetchWeather(query = query)
             if (result.isSuccessful) {
@@ -32,7 +35,8 @@ class WeatherHomeViewModel @Inject constructor(
                         countryFlagUrl = "https://openweathermap.org/images/flags/${weather.sys.country.lowercase()}.png",
                         temperature = weather.main.feels_like.toString(),
                         howsWeather = weather.weather[0].description,
-                        address = "${weather.name}, ${weather.sys.country}"
+                        address = "${weather.name}, ${weather.sys.country}",
+                        coords = weather.coord
                     )
                     _state.value = uiModel
                 }
